@@ -1,10 +1,11 @@
 # realisation-professionnelle-bts-2-slam-iris
+
 Projet de réalisation professionnelle pour les BTS 2 SLAM IRIS réalisé par mes soins
 
 ## Installation du projet
 
 ```bash
-git clone https://github.com/Nicolas-Choquet-pour-MediaSchool-Nice/realisation-professionnelle-bts-2-slam-iris.git
+git clone https://github.com/kevinsenasson/Roomboking.git
 cd realisation-professionnelle-bts-2-slam-iris
 # remplire le fichier .env au moins avec l'url de connexion à la bdd
 composer install
@@ -13,12 +14,12 @@ php bin/console doctrine:fixtures:load
 symfony server:start
 ```
 
-
 ## Déploiement production avec Docker Compose
 
 1. L'envoie de l'image docker sur le registry GitHub est automatisé à chaque push sur `main`
 
 2. Copier le fichier d'environnement dédié :
+
     ```bash
     cp .env.example .env.prod
     ```
@@ -26,11 +27,13 @@ symfony server:start
 3. Modifier les valeurs sensibles dans `.env.prod` (`DEFAULT_URI`, `DATABASE_URL`, `APP_SECRET`, etc.).
 
 4. Lancer la stack en production :
+
     ```bash
     docker compose --env-file .env.prod -f docker-compose.prod.yml up -d --build
     ```
 
 5. Vérifier les logs :
+
     ```bash
     docker compose --env-file .env.prod -f docker-compose.prod.yml logs -f
     ```
@@ -146,23 +149,23 @@ flowchart TD
 
     ListStudents --> CreateStudent[Create studient]
     CreateStudent --> AddToClass[Add studient to class]
-    
+
     ListStudents --> AddToClass
     AddToClass --> ListStudents
 
     Home --> ConsultRooms[Consult rooms]
     ConsultRooms --> ChoseRoom[Chose room]
     ChoseRoom --> Booked{booked}
-    
+
     Booked -- Yes --> Unbook[Unbook room]
     Booked -- No --> Book[Book room]
-    
+
     Unbook --> ConsultRooms
     Book --> ConsultRooms
 ```
 
 ### Diagramme d'activité Administrateur
-    
+
 ```mermaid
 flowchart TD
     Admin((Admin)) --> Login[login]
@@ -171,7 +174,7 @@ flowchart TD
     Success -- Yes --> Home[home]
 
     Home --> AdminPage[Adminitration page]
-    
+
     AdminPage --> ConsultRoomsAdmin[Consult rooms]
     ConsultRoomsAdmin --> ChoseRoomAdmin[Chose room]
     ChoseRoomAdmin --> DeleteRoom[Delete room]
@@ -189,17 +192,17 @@ flowchart TD
 
     ListStudents --> CreateStudent[Create studient]
     CreateStudent --> AddToClass[Add studient to class]
-    
+
     ListStudents --> AddToClass
     AddToClass --> ListStudents
 
     Home --> ConsultRooms[Consult rooms]
     ConsultRooms --> ChoseRoom[Chose room]
     ChoseRoom --> Booked{booked}
-    
+
     Booked -- Yes --> Unbook[Unbook room]
     Booked -- No --> Book[Book room]
-    
+
     Unbook --> ConsultRooms
     Book --> ConsultRooms
 ```

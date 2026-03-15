@@ -68,7 +68,10 @@ RUN set -xe; \
 
 # Configuration du point d'entrée
 COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-RUN chmod +x /usr/local/bin/docker-entrypoint
+# Supprimer le BOM UTF-8 et les fins de ligne Windows (CRLF → LF) pour compatibilité Linux
+RUN sed -i '1s/^\xEF\xBB\xBF//' /usr/local/bin/docker-entrypoint && \
+    sed -i 's/\r//' /usr/local/bin/docker-entrypoint && \
+    chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
