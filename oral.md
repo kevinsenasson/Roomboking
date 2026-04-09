@@ -138,50 +138,6 @@ L'application suit le pattern **MVC (Modèle-Vue-Contrôleur)** natif de Symfony
 
 ### Modèle de données
 
-Le schéma repose sur **8 entités** liées par des relations Doctrine :
-
-```mermaid
-erDiagram
-    USER ||--|| COORDINATOR : "est"
-    USER ||--|| ADMIN : "est"
-    USER ||--|| STUDENT : "est"
-    USER ||--o{ RESERVATION : "effectue"
-    COORDINATOR }o--o{ SCHOOL_CLASS : "gère"
-    SCHOOL_CLASS ||--o{ STUDENT : "contient"
-    ROOM ||--o{ RESERVATION : "accueille"
-    ROOM }o--o{ EQUIPMENT : "possède"
-
-    USER {
-        int id PK
-        string email
-        string firstname
-        string lastname
-        string password
-        json roles
-    }
-    ROOM {
-        int id PK
-        string name
-        int capacity
-    }
-    RESERVATION {
-        int id PK
-        int room_id FK
-        int user_id FK
-        datetime reservation_start
-        datetime reservation_end
-        string status
-    }
-    EQUIPMENT {
-        int id PK
-        string name
-    }
-    SCHOOL_CLASS {
-        int id PK
-        string name
-    }
-```
-
 ## Diagrammes
 
 ### Diagramme de Relation (ERD)
