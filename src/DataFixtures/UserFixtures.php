@@ -35,7 +35,7 @@ class UserFixtures extends Fixture
             $user->setPassword($this->hasher->hashPassword($user, 'password123'));
             $manager->persist($user);
 
-            $student = new Student()->setUser($user);
+            $student = (new Student())->setUser($user);
             $manager->persist($student);
 
             $user->setStudent($student);
@@ -52,7 +52,7 @@ class UserFixtures extends Fixture
             $user->setPassword($this->hasher->hashPassword($user, 'password123'));
             $manager->persist($user);
 
-            $admin = new Admin()->setUser($user);
+            $admin = (new Admin())->setUser($user);
             $manager->persist($admin);
 
             $user->setAdmin($admin);
@@ -69,7 +69,7 @@ class UserFixtures extends Fixture
             $user->setPassword($this->hasher->hashPassword($user, 'password123'));
             $manager->persist($user);
 
-            $coordinator = new Coordinator()->setUser($user);
+            $coordinator = (new Coordinator())->setUser($user);
             $manager->persist($coordinator);
 
             $user->setCoordinator($coordinator);
